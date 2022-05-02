@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YoutubeProject">
         <activity
-            android:name=".YoutubeItemActivity"
-            android:screenOrientation="landscape"
-            android:exported="true" />
+            android:name=".MelonDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".YoutubeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YoutubeItemActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MelonActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
