@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YoutubeProject">
         <activity
+            android:name=".instaMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instaLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instaJoinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MelonActivity"
+            android:exported="false" />
+        <activity
             android:name=".MelonDetailActivity"
             android:exported="false" />
         <activity
@@ -22,7 +34,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MelonActivity"
+            android:name=".instaSplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
