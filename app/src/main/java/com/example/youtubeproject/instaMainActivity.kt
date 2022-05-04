@@ -26,20 +26,8 @@ class instaMainActivity : AppCompatActivity() {
         pager.adapter = InstaMainPageAdapter(this, 3)
 
         TabLayoutMediator(tabs, pager) { tab, position ->
-            tabs.addTab(tabs.newTab().setIcon(tabIconArray[position]))
+            tab.setIcon(tabIconArray[position])
         }.attach()
-
-        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                pager.currentItem = tab!!.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
     }
 }
 
