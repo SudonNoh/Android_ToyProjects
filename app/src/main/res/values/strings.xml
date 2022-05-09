@@ -4,4 +4,6 @@
     <string name="project_title">Youtube</string>
     <string name="thumbnail">thumbnail</string>
     <string name="detail">detail</string>
+    <string name="user_profile">user profile</string>
+    <string name="content_img">content img</string>
 </resources>

@@ -6,12 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".instaMainActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="Logo"
+        android:src="@drawable/logo_outstagram"
+        app:layout_constraintBottom_toTopOf="@id/main_pager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_tab"/>
+        app:layout_constraintBottom_toTopOf="@id/main_tab"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_tab"
