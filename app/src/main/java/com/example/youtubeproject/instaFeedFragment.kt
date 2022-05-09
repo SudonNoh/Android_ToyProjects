@@ -48,7 +48,8 @@ class InstaFeedFragment : Fragment() {
                     // fragment 에서는 activity 를 따로 찾아서 넣어주어야 한다. activity 에서는 this 로
                     // 입력한다. 이 fragment 는 결국 instaMainActivity 위에 그려지기 때문에 context 로
                     // 받아야 하는 activity 는 instaMainActivity 이다.
-                    LayoutInflater.from()
+                    LayoutInflater.from(activity),
+                    Glide.with(activity!!)
                 )
             }
 
@@ -87,8 +88,16 @@ class InstaFeedFragment : Fragment() {
 
         override fun onBindViewHolder(holder: PostRecyclerViewAdapter.ViewHolder, position: Int) {
             val post = postList[position]
-            glide.load(post.owner_profile.image).into(holder.ownerImg)
-            glide.load(post.image).into(holder.postImg)
+
+            // image?.let 을 하면 image 가 null 이 아닌 경우에만 실행
+            // RetrofitService 에서 image : String 에 ? 를 붙여서 nullable 로 변경
+            // circleCrop 으로 동그랗게 사진을 조정해준다.
+            post.owner_profile.image?.let {
+                glide.load(it).centerCrop().circleCrop().into(holder.ownerImg)
+            }
+            post.image.let {
+                glide.load(it).centerCrop().into(holder.postImg)
+            }
             holder.ownerUsername.text = post.owner_profile.username
             holder.postContent.text = post.content
         }

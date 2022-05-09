@@ -21,7 +21,7 @@ class InstaPost(
 )
 
 class OwnerProfile(
-    val username: String, val image: String
+    val username: String, val image: String?
 )
 
 interface RetrofitService {
