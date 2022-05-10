@@ -17,7 +17,7 @@ class User(
 )
 
 class InstaPost(
-    val content: String, val image: String, val owner_profile: OwnerProfile
+    val id: Int, val content: String, val image: String, val owner_profile: OwnerProfile
 )
 
 class OwnerProfile(
@@ -51,4 +51,11 @@ interface RetrofitService {
     @GET("instagram/post/list/all/")
     fun getInstagramPosts(
     ): Call<ArrayList<InstaPost>>
+
+    @POST("instagram/post/like/{post_id}/")
+    fun postLike(
+        // Path 의 인자로 들어가는 post_id : url 에 입력되는 'post_id'
+        // 그 옆에 post_id : 받아온 'post_id'
+        @Path("post_id") post_id: Int
+    ): Call<Any>
 }

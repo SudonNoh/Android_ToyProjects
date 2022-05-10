@@ -49,6 +49,7 @@ class instaJoinActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val user: User = response.body()!!
+                        // login 여부를 판단하기 위한 방법으로 sharedpreference 에 token 값을 저장
                         val sharedPreferences =
                             getSharedPreferences("user_info", Context.MODE_PRIVATE)
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()

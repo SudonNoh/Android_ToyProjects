@@ -6,4 +6,9 @@
     <string name="detail">detail</string>
     <string name="user_profile">user profile</string>
     <string name="content_img">content img</string>
+    <string name="like_img">like_img</string>
+    <string name="white_background">white_background</string>
+    <string name="picture">picture</string>
+    <string name="logo">logo</string>
+    <string name="post">POST</string>
 </resources>

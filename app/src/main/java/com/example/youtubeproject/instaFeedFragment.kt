@@ -1,13 +1,18 @@
 package com.example.youtubeproject
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -15,12 +20,29 @@ import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class InstaFeedFragment : Fragment() {
+    // 전역변수로 사용하기 위해 따로 빼놓음(좋아요 기능을 만들기 위함)
+    lateinit var retrofitService: RetrofitService
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.insta_feed_fragment, container, false)
+    }
+
+    fun postLike(post_id: Int) {
+        retrofitService.postLike(post_id).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                Toast.makeText(activity, "좋아요!", Toast.LENGTH_SHORT).show()
+                // 여기서는 view 를 불러오기 어렵기 때문에 Thread 에서 visibility 설정을 바꿔주기
+                // 어렵다. 따라서 이 부분을 Adapter 에서 진행하도록 한다.
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                Toast.makeText(activity, "좋아요 실패!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +55,7 @@ class InstaFeedFragment : Fragment() {
             .baseUrl("http://mellowcode.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val retrofitService = retrofit.create(RetrofitService::class.java)
+        retrofitService = retrofit.create(RetrofitService::class.java)
 
         retrofitService.getInstagramPosts().enqueue(object : Callback<ArrayList<InstaPost>> {
             override fun onResponse(
@@ -49,7 +71,10 @@ class InstaFeedFragment : Fragment() {
                     // 입력한다. 이 fragment 는 결국 instaMainActivity 위에 그려지기 때문에 context 로
                     // 받아야 하는 activity 는 instaMainActivity 이다.
                     LayoutInflater.from(activity),
-                    Glide.with(activity!!)
+                    Glide.with(activity!!),
+                    // instaFeedFragment 를 받는 이유는 위에서 만든 postLike 를 Adapter 에서 사용하기 위해
+                    this@InstaFeedFragment,
+                    activity as (instaMainActivity)
                 )
             }
 
@@ -61,19 +86,42 @@ class InstaFeedFragment : Fragment() {
     class PostRecyclerViewAdapter(
         val postList: ArrayList<InstaPost>,
         val inflater: LayoutInflater,
-        val glide: RequestManager
+        val glide: RequestManager,
+        // instaFeedFragment 를 받는 이유는 위에서 만든 postLike 를 Adapter 에서 사용하기 위함이다.
+        val instaFeedFragment: InstaFeedFragment,
+        // Thread 에서 View 를 사용하기 위해서 activity 를 context 로 받는다.
+        val activity: instaMainActivity
     ) : RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val ownerImg: ImageView
             val ownerUsername: TextView
             val postImg: ImageView
             val postContent: TextView
+            val postLayer : ImageView
+            val postHeart : ImageView
 
             init {
                 ownerImg = itemView.findViewById(R.id.owner_img)
                 ownerUsername = itemView.findViewById(R.id.owner_username)
                 postImg = itemView.findViewById(R.id.post_img)
                 postContent = itemView.findViewById(R.id.post_content)
+                postLayer = itemView.findViewById(R.id.post_layer)
+                postHeart = itemView.findViewById(R.id.post_heart)
+
+                postImg.setOnClickListener {
+                    instaFeedFragment.postLike(postList[adapterPosition].id)
+                    Thread {
+                        activity.runOnUiThread {
+                            postLayer.visibility = VISIBLE
+                            postHeart.visibility = VISIBLE
+                        }
+                        Thread.sleep(2000)
+                        activity.runOnUiThread {
+                            postLayer.visibility = INVISIBLE
+                            postHeart.visibility = INVISIBLE
+                        }
+                    }.start()
+                }
             }
         }
 
