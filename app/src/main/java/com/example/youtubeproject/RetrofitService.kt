@@ -1,5 +1,7 @@
 package com.example.youtubeproject
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.io.Serializable
@@ -57,5 +59,18 @@ interface RetrofitService {
         // Path 의 인자로 들어가는 post_id : url 에 입력되는 'post_id'
         // 그 옆에 post_id : 받아온 'post_id'
         @Path("post_id") post_id: Int
+    ): Call<Any>
+
+    // Multipart : 파일을 보낼 때 사용
+    @Multipart
+    @POST("instagram/post/")
+    fun uploadPost(
+        // post 한 사람을 확인하기 위해 Token 값을 활용해야 함.
+        // Token 값을 보낼 때에는 Header 를 사용
+        @HeaderMap headers: Map<String, String>,
+        // Multipart 는 파일을 조각내서 보내는 개념
+        // image 를 조각내서 전송
+        @Part image : MultipartBody.Part,
+        @Part("content") content: RequestBody
     ): Call<Any>
 }

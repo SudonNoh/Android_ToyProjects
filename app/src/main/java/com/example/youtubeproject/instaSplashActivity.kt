@@ -26,3 +26,6 @@ class instaSplashActivity : AppCompatActivity() {
         }
     }
 }
+
+// 이 부분은 로그인 여부를 확인하는 화면이기 때문에 뒤로가기 버튼을 눌렀을 때 다시 나타나면 안되는 화면이다
+// 이것을 설정하기 위해서는 MANIFEST 에서 nohistory 를 true 로 설정해주어야 한다.

@@ -11,4 +11,5 @@
     <string name="picture">picture</string>
     <string name="logo">logo</string>
     <string name="post">POST</string>
+    <string name="selected_img" />
 </resources>

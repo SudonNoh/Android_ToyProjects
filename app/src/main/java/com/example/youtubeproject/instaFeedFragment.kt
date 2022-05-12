@@ -22,13 +22,32 @@ import retrofit2.converter.gson.GsonConverterFactory
 class InstaFeedFragment : Fragment() {
     // 전역변수로 사용하기 위해 따로 빼놓음(좋아요 기능을 만들기 위함)
     lateinit var retrofitService: RetrofitService
+    lateinit var postRecyclerView: RecyclerView
+    lateinit var postList: ArrayList<InstaPost>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.insta_feed_fragment, container, false)
+        postList = arrayListOf()
+        super.onCreate(savedInstanceState)
+        var postInflater = inflater.inflate(R.layout.insta_feed_fragment, container, false)
+        postRecyclerView = postInflater.findViewById<RecyclerView>(R.id.feed_list)
+        postRecyclerView.adapter = PostRecyclerViewAdapter(
+            postList!!,
+            // LayoutInflater.from 안에 context 로 activity 를 넣어주어야 하는데
+            // fragment 에서는 activity 를 따로 찾아서 넣어주어야 한다. activity 에서는 this 로
+            // 입력한다. 이 fragment 는 결국 instaMainActivity 위에 그려지기 때문에 context 로
+            // 받아야 하는 activity 는 instaMainActivity 이다.
+            LayoutInflater.from(activity),
+            Glide.with(this@InstaFeedFragment),
+            // instaFeedFragment 를 받는 이유는 위에서 만든 postLike 를 Adapter 에서 사용하기 위해
+            this@InstaFeedFragment,
+            activity as (instaMainActivity)
+        )
+        return postInflater
+//        return inflater.inflate(R.layout.insta_feed_fragment, container, false)
     }
 
     fun postLike(post_id: Int) {
@@ -62,8 +81,8 @@ class InstaFeedFragment : Fragment() {
                 call: Call<ArrayList<InstaPost>>,
                 response: Response<ArrayList<InstaPost>>
             ) {
-                val postList = response.body()
-                val postRecyclerView = view.findViewById<RecyclerView>(R.id.feed_list)
+                postList = response.body()!!
+                postRecyclerView = view.findViewById<RecyclerView>(R.id.feed_list)
                 postRecyclerView.adapter = PostRecyclerViewAdapter(
                     postList!!,
                     // LayoutInflater.from 안에 context 로 activity 를 넣어주어야 하는데
