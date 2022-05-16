@@ -1,5 +1,6 @@
 package com.example.youtubeproject
 
+import android.accessibilityservice.GestureDescription
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -24,6 +25,12 @@ class InstaPost(
 
 class OwnerProfile(
     val username: String, val image: String?
+)
+
+class UserInfo(
+    val id: Int,
+    val username: String,
+    val profile: OwnerProfile
 )
 
 interface RetrofitService {
@@ -70,7 +77,21 @@ interface RetrofitService {
         @HeaderMap headers: Map<String, String>,
         // Multipart 는 파일을 조각내서 보내는 개념
         // image 를 조각내서 전송
-        @Part image : MultipartBody.Part,
+        @Part image: MultipartBody.Part,
         @Part("content") content: RequestBody
+    ): Call<Any>
+
+    @GET("user/userInfo/")
+    fun getUserInfo(
+        @HeaderMap headers: Map<String, String>,
+    ): Call<UserInfo>
+
+    @Multipart
+    @PUT("user/profile/{user_id}/")
+    fun changeProfile(
+        @Path("user_id") userId : Int,
+        @HeaderMap headers: Map<String, String>,
+        @Part image : MultipartBody.Part,
+        @Part("user") user: RequestBody,
     ): Call<Any>
 }
