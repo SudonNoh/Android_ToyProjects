@@ -5,7 +5,7 @@
     2. Youtube
     3. Instagram
 
-## Melon
+## 1. Melon
 <div align=center>
   
   ![Android-melon-brightgreen](https://user-images.githubusercontent.com/69226800/168702611-e3ea39cc-71dc-4b03-ad6e-0b4442b15359.svg)
@@ -30,13 +30,13 @@
     5) MediaPlayer 활용
         - MediaPlayer를 활용해 음악을 재생하고 멈추는 기능을 만들었습니다.
 
-## Youtube
+## 2. Youtube
 <div align=center>
   
   ![Android-youtube-blueviolet](https://user-images.githubusercontent.com/69226800/168702500-4e673f94-0eaa-4d9c-8abd-d22da799e992.svg)
   
   ![youtube(1)](https://user-images.githubusercontent.com/69226800/168701908-e3933171-e39a-4e9b-a04b-4dd9948d74e7.gif)
-  
+    
   ![youtube(2)](https://user-images.githubusercontent.com/69226800/168701941-3dc62ff5-084d-4e6c-8993-5dfc44ce0513.gif)
   
 </div>
@@ -47,3 +47,15 @@
         - 서버로부터 동영상 객체들을 불러옵니다.
         - RecyclerView를 활용해 동영상, 제목, 설명을 목록화 합니다.
     2) Glide & MediaPlayer를 활용한 동영상 재생
+    
+## 3. Instagram
+
+<div align=center>
+    
+    ![Android-instagram-ff69b4](https://user-images.githubusercontent.com/69226800/168710684-6cc70164-a7bb-4682-8420-05aecfaf6987.svg)
+    
+    
+
+</div>
+
+### Description
