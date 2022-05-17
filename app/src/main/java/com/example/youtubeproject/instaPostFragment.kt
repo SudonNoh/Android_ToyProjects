@@ -98,7 +98,6 @@ class InstaPostFragment : Fragment() {
         upload = view.findViewById(R.id.upload)
 
         val glide = Glide.with(activity as instaMainActivity)
-
         // uri : 파일, 웹사이트 등이 저장된 위치
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

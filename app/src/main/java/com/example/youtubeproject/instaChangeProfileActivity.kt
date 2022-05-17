@@ -23,7 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
-class InstaChangeProfileActivity : AppCompatActivity() {
+class instaChangeProfileActivity : AppCompatActivity() {
 
     var imageUri: Uri? = null
     var glide: RequestManager? = null
@@ -81,7 +81,7 @@ class InstaChangeProfileActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Any>, response: Response<Any>) {
                         if (response.isSuccessful) {
                             Toast.makeText(
-                                this@InstaChangeProfileActivity,
+                                this@instaChangeProfileActivity,
                                 "변경완료",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -94,7 +94,7 @@ class InstaChangeProfileActivity : AppCompatActivity() {
 
                     override fun onFailure(call: Call<Any>, t: Throwable) {
                         Toast.makeText(
-                            this@InstaChangeProfileActivity,
+                            this@instaChangeProfileActivity,
                             "변경 실패",
                             Toast.LENGTH_SHORT
                         ).show()

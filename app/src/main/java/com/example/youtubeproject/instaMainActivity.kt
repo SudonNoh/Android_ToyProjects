@@ -13,12 +13,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class instaMainActivity : AppCompatActivity() {
 
-    val instaPostFragment = InstaPostFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insta_main)
 
+        val instaPostFragment = InstaPostFragment()
         val tabs = findViewById<TabLayout>(R.id.main_tab)
         val tabIconArray = arrayOf(
             R.drawable.btn_outsta_home,

@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YoutubeProject">
         <activity
-            android:name=".InstaChangeProfileActivity"
+            android:name=".instaChangeProfileActivity"
             android:exported="false" />
         <activity
             android:name=".instaMainActivity"
