@@ -53,8 +53,6 @@
 <div align=center>
     
     ![Android-instagram-ff69b4](https://user-images.githubusercontent.com/69226800/168710684-6cc70164-a7bb-4682-8420-05aecfaf6987.svg)
-    
-    
 
 </div>
 
