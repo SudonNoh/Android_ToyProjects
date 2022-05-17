@@ -1,5 +1,9 @@
 # Android ToyProject
 
+    **Version
+    1. Android studio 2021.1.1 patch 2
+    2. DRF
+
 ### Content
     1. Melon
     2. Youtube
@@ -56,3 +60,51 @@
 </div>
 
 ### Description
+
+<div align=center>
+    
+![join](https://user-images.githubusercontent.com/69226800/168744331-9370d625-d5e2-4919-82d0-de9c0d1ba0cf.gif)
+![login](https://user-images.githubusercontent.com/69226800/168744340-d022b3af-4540-4105-ad5d-896ca90797bb.gif)
+
+</div>
+
+    1) SplashActivity를 통해 로그인 여부 확인 후 로그인 여부에 따라 LoginActivity / FeedActivity 로 이동
+    2) 회원가입 기능
+        - 서버와 연동해 사용자로부터 ID/PW 를 입력 받아 회원가입
+        - 회원가입 완료시 SharedPreference에 Token 값과 user id를 저장
+        - 회원가입 완료시 자동 로그인
+    3) 로그인 기능
+        - 사용자로부터 ID, PW를 받아 로그인
+        - 로그인시 서버로부터 Token 값을 받아 SharedPreference에 저장
+        - 한번 로그인이 되면 SharedPreference의 데이터를 삭제하기 전까지 자동 로그인
+        
+<div align=center>
+
+![favorite](https://user-images.githubusercontent.com/69226800/168744345-383d2373-2fce-45ea-9879-c8c3996d96f1.gif)
+
+</div>
+
+    4) 좋아요 기능
+        - layout을 활용해 이미지를 누르면 "좋아요"문구와 함께 하트모양 노출 후 자동으로 돌아아옴
+
+<div align=center>
+    
+![post(1)](https://user-images.githubusercontent.com/69226800/168744462-08b86913-8b94-421c-9c0c-250895ef869e.gif)
+![post(2)](https://user-images.githubusercontent.com/69226800/168744465-0e85d44a-b4d1-4f27-b4e4-f634ae1625ad.gif)
+
+</div>
+
+    5) Post 기능
+        - Intent ACTION_PICK 기능을 이용해 이미지 선택 창으로 접근
+        - 이미지를 선택해 서버에 POST 요청을 보냄
+        - 이때 Multipart를 활용해 텍스트와 함께 전송
+        - Feed에 나타나는 지 확인
+        
+<div align=center>
+    
+![profile](https://user-images.githubusercontent.com/69226800/168744453-f9100a92-2d29-40c6-9683-d1df75079792.gif)
+
+</div>
+
+    6) Profile 수정 기능
+        - Profile 정보를 서버로 보내 Profile 정보를 바꾸는 기능
